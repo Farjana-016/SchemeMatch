@@ -1,3 +1,4 @@
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 import json
@@ -5,51 +6,64 @@ from pathlib import Path
 
 app = Flask(__name__)
 
-# Allow the local frontend to communicate with Flask.
-# Restrict access to the Live Server origin used by this project.
+# Allow requests from the deployed frontend and local development frontend.
 CORS(
     app,
     resources={
         r"/api/*": {
-            "origins": ["http://127.0.0.1:5500"]
+            "origins": [
+                "https://schemematch-woad.vercel.app",
+                "http://127.0.0.1:5500",
+                "http://localhost:5500",
+                "http://127.0.0.1:5501",
+                "http://localhost:5501"
+            ]
         }
     }
 )
 
-# Locate the project folders.
+# Locate the scheme database.
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE_PATH = BASE_DIR.parent / "database" / "schemes.json"
 
 
-# Load fictional demonstration schemes from the JSON file.
 def load_schemes():
     with open(DATABASE_PATH, "r", encoding="utf-8") as file:
         return json.load(file)
 
 
-# API endpoint: return all schemes.
+# Test whether the backend is running.
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "status": "success",
+        "message": "SchemeMatch backend is running."
+    })
+
+
+# Return all demonstration schemes.
 @app.route("/api/schemes", methods=["GET"])
 def get_schemes():
     try:
-        schemes = load_schemes()
+        data = load_schemes()
 
-        # Support a JSON list or an object containing a schemes list.
-        if isinstance(schemes, dict):
-            schemes = schemes.get("schemes", [])
+        if isinstance(data, dict):
+            data = data.get("schemes", [])
 
-        if not isinstance(schemes, list):
+        if not isinstance(data, list):
             return jsonify({
                 "error": "The scheme database must contain a list."
             }), 500
 
         return jsonify({
-            "total": len(schemes),
-            "schemes": schemes
+            "total": len(data),
+            "schemes": data
         })
 
     except FileNotFoundError:
         return jsonify({
-            "error": "Schemes database file was not found."
+            "error": "Schemes database file was not found.",
+            "expected_path": str(DATABASE_PATH)
         }), 500
 
     except json.JSONDecodeError:
@@ -58,11 +72,11 @@ def get_schemes():
         }), 500
 
     except OSError:
+        app.logger.exception("Could not read the scheme database.")
         return jsonify({
             "error": "The scheme database could not be read."
         }), 500
 
 
-# Start the local development server.
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
