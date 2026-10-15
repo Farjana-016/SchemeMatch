@@ -3,36 +3,26 @@
    SchemeMatch — Government Scheme Finder
    Team Impact X | INNOHACKS 2.0
 
-   Prototype note:
-   These are fictional demo records used to
-   demonstrate the matching process. They are
-   NOT verified government schemes.
+   All scheme records are fictional demo data.
+   They are NOT verified government schemes.
 ========================================= */
-
-
-/* 1. LOAD SCHEME DATA FROM THE BACKEND */
 
 let schemes = [];
 let schemesLoaded = false;
 let schemeLoadError = "";
+let currentResults = [];
 
-
-/* 2. GET HTML ELEMENTS */
+/* 1. GET HTML ELEMENTS */
 
 const schemeForm = document.getElementById("scheme-form");
-
 const ageInput = document.getElementById("age");
 const stateInput = document.getElementById("state");
 const incomeInput = document.getElementById("income");
 const occupationInput = document.getElementById("occupation");
-
-const studentStatusGroup =
-    document.getElementById("student-status-group");
-
-const studentStatusInput =
-    document.getElementById("student-status");
-
+const studentStatusGroup = document.getElementById("student-status-group");
+const studentStatusInput = document.getElementById("student-status");
 const formError = document.getElementById("form-error");
+
 const submitButton = schemeForm
     ? schemeForm.querySelector('button[type="submit"]')
     : null;
@@ -42,43 +32,27 @@ const resultsSummary = document.getElementById("results-summary");
 const categoryFilter = document.getElementById("category-filter");
 const schemeResults = document.getElementById("scheme-results");
 const noResults = document.getElementById("no-results");
-
-const editAnswersButton =
-    document.getElementById("edit-answers-button");
-
+const editAnswersButton = document.getElementById("edit-answers-button");
 const schemeDetails = document.getElementById("scheme-details");
-
-const eligibilityPanel =
-    document.getElementById("eligibility-panel");
-
+const eligibilityPanel = document.getElementById("eligibility-panel");
 const matchedList = document.getElementById("matched-list");
 const unmetList = document.getElementById("unmet-list");
 const unknownList = document.getElementById("unknown-list");
+const startAgainButton = document.getElementById("start-again-button");
 
-const startAgainButton =
-    document.getElementById("start-again-button");
-
-
-/* 3. STORE THE LATEST RESULTS */
-
-let currentResults = [];
+/* 2. SHOW FORM ERRORS */
 
 function showFormError(message) {
-    if (!formError) {
-        return;
-    }
+    if (!formError) return;
 
     formError.textContent = message;
     formError.hidden = message === "";
 }
 
-
-/* 4. SHOW OR HIDE THE STUDENT QUESTION */
+/* 3. SHOW OR HIDE THE STUDENT QUESTION */
 
 function updateStudentField() {
-    if (!occupationInput || !studentStatusGroup) {
-        return;
-    }
+    if (!occupationInput || !studentStatusGroup) return;
 
     if (occupationInput.value === "student") {
         studentStatusGroup.hidden = false;
@@ -93,16 +67,15 @@ function updateStudentField() {
 
 if (occupationInput) {
     occupationInput.addEventListener("change", updateStudentField);
-    updateStudentField();
 }
 
-
-/* 5. READ AND VALIDATE THE USER'S ANSWERS */
+/* 4. READ AND VALIDATE USER ANSWERS */
 
 function readUserProfile() {
     const age = Number(ageInput.value);
     const income = Number(incomeInput.value);
     const selectedOccupation = occupationInput.value;
+
     const occupationForMatching = {
         student: "student",
         working: "employed"
@@ -125,15 +98,11 @@ function readUserProfile() {
         age < 1 ||
         age > 120
     ) {
-        return {
-            error: "Please enter a valid age between 1 and 120."
-        };
+        return { error: "Please enter a valid age between 1 and 120." };
     }
 
     if (!profile.state) {
-        return {
-            error: "Please select your state or union territory."
-        };
+        return { error: "Please select your state or union territory." };
     }
 
     if (
@@ -141,39 +110,24 @@ function readUserProfile() {
         !Number.isFinite(income) ||
         income < 0
     ) {
-        return {
-            error: "Please enter a valid annual family income."
-        };
+        return { error: "Please enter a valid annual family income." };
     }
 
-    if (!profile.selectedOccupation) {
-        return {
-            error: "Please select your occupation."
-        };
+    if (!selectedOccupation) {
+        return { error: "Please select your occupation." };
     }
 
     if (
-        profile.selectedOccupation === "student" &&
+        selectedOccupation === "student" &&
         !profile.studentStatus
     ) {
-        return {
-            error: "Please select your student status."
-        };
+        return { error: "Please select your student status." };
     }
 
-    return {
-        profile: profile
-    };
+    return { profile: profile };
 }
 
-
-/* 6. CHECK ONE ELIGIBILITY CRITERION
-
-   Returns one of three values:
-   "match"   = criterion is satisfied
-   "unmet"   = criterion is not satisfied
-   "unknown" = criterion cannot be confirmed
-*/
+/* 5. EVALUATE ONE ELIGIBILITY CRITERION */
 
 function evaluateCriterion(criterion, profile) {
     const userValue = profile[criterion.key];
@@ -199,26 +153,18 @@ function evaluateCriterion(criterion, profile) {
             return "unknown";
         }
 
-        if (
-            userValue >= criterion.min &&
+        return userValue >= criterion.min &&
             userValue <= criterion.max
-        ) {
-            return "match";
-        }
-
-        return "unmet";
+            ? "match"
+            : "unmet";
     }
 
     if (criterion.type === "equals") {
-        if (criterion.value === undefined) {
-            return "unknown";
-        }
+        if (criterion.value === undefined) return "unknown";
 
-        if (userValue === criterion.value) {
-            return "match";
-        }
-
-        return "unmet";
+        return userValue === criterion.value
+            ? "match"
+            : "unmet";
     }
 
     if (criterion.type === "max") {
@@ -229,11 +175,9 @@ function evaluateCriterion(criterion, profile) {
             return "unknown";
         }
 
-        if (userValue <= criterion.value) {
-            return "match";
-        }
-
-        return "unmet";
+        return userValue <= criterion.value
+            ? "match"
+            : "unmet";
     }
 
     if (criterion.type === "min") {
@@ -244,11 +188,9 @@ function evaluateCriterion(criterion, profile) {
             return "unknown";
         }
 
-        if (userValue >= criterion.value) {
-            return "match";
-        }
-
-        return "unmet";
+        return userValue >= criterion.value
+            ? "match"
+            : "unmet";
     }
 
     if (criterion.type === "in") {
@@ -265,12 +207,10 @@ function evaluateCriterion(criterion, profile) {
             : "unmet";
     }
 
-    // An unsupported criterion must not be treated as a match.
     return "unknown";
 }
 
-
-/* 7. CHECK ALL CRITERIA FOR ONE SCHEME */
+/* 6. EVALUATE A SCHEME */
 
 function evaluateScheme(scheme, profile) {
     const result = {
@@ -293,37 +233,32 @@ function evaluateScheme(scheme, profile) {
         }
     });
 
-    /*
-       Only show a scheme as a potential match when no
-       listed criterion is unmet.
-
-       Unknown criteria are NOT proof of eligibility.
-    */
-
+    // Unknown criteria do not prove eligibility.
     result.potentialMatch = result.unmet.length === 0;
 
     return result;
 }
 
-
-/* 8. CREATE A SCHEME RESULT CARD */
+/* 7. FORMAT SAMPLE BENEFITS */
 
 function getBenefitSummary(benefit) {
-    const summary = benefit.description || "Benefit details need verification.";
+    benefit = benefit || {};
+
+    const summary = benefit.description ||
+        "Benefit details need verification.";
 
     if (Number.isFinite(benefit.amountINR)) {
-        return summary +
-            " (sample amount: ₹" +
-            benefit.amountINR.toLocaleString("en-IN") +
-            ")";
+        return summary + " (sample amount: ₹" +
+            benefit.amountINR.toLocaleString("en-IN") + ")";
     }
 
     return summary;
 }
 
+/* 8. CREATE A SCHEME RESULT CARD */
+
 function createSchemeCard(result) {
     const scheme = result.scheme;
-
     const card = document.createElement("article");
     card.className = "scheme-card";
 
@@ -374,33 +309,42 @@ function createSchemeCard(result) {
         showSchemeDetails(result);
     });
 
-    card.appendChild(title);
-    card.appendChild(description);
-    card.appendChild(category);
-    card.appendChild(benefit);
-    card.appendChild(demoNotice);
-    card.appendChild(status);
-    card.appendChild(matchedText);
-    card.appendChild(unknownText);
-    card.appendChild(detailsButton);
+    [
+        title,
+        description,
+        category,
+        benefit,
+        demoNotice,
+        status,
+        matchedText,
+        unknownText,
+        detailsButton
+    ].forEach(function (element) {
+        card.appendChild(element);
+    });
 
     return card;
 }
 
-
-/* 9. RENDER THE RESULTS */
+/* 9. RENDER RESULTS */
 
 function renderResults() {
+    if (
+        !schemeResults ||
+        !categoryFilter ||
+        !noResults ||
+        !resultsSummary
+    ) {
+        return;
+    }
+
     schemeResults.replaceChildren();
 
     const selectedCategory = categoryFilter.value;
 
     const filteredResults = currentResults.filter(function (result) {
-        if (selectedCategory === "all") {
-            return true;
-        }
-
-        return result.scheme.category === selectedCategory;
+        return selectedCategory === "all" ||
+            result.scheme.category === selectedCategory;
     });
 
     if (filteredResults.length === 0) {
@@ -418,17 +362,18 @@ function renderResults() {
 
     resultsSummary.textContent =
         filteredResults.length +
-        " potential demo match(es) found. " +
-        "These examples are fictional and do not confirm eligibility.";
+        " potential demo match(es) found. These examples are fictional " +
+        "and do not confirm eligibility.";
 
-    schemeDetails.hidden = true;
-    eligibilityPanel.hidden = true;
+    if (schemeDetails) schemeDetails.hidden = true;
+    if (eligibilityPanel) eligibilityPanel.hidden = true;
 }
 
-
-/* 10. SHOW DETAILS FOR A SELECTED SCHEME */
+/* 10. SHOW SCHEME DETAILS */
 
 function showSchemeDetails(result) {
+    if (!schemeDetails || !eligibilityPanel) return;
+
     const scheme = result.scheme;
 
     schemeDetails.replaceChildren();
@@ -443,17 +388,16 @@ function showSchemeDetails(result) {
 
     const explanation = document.createElement("p");
     explanation.textContent =
-        "Review the following criteria classifications. " +
-        "A match against demo criteria does not establish actual eligibility.";
-
-    schemeDetails.appendChild(title);
-    schemeDetails.appendChild(notice);
-    schemeDetails.appendChild(explanation);
+        "Review these criteria classifications. A match against demo " +
+        "criteria does not establish actual eligibility.";
 
     const benefit = document.createElement("p");
     benefit.textContent = "Fictional sample benefit: " +
         getBenefitSummary(scheme.benefit);
-    schemeDetails.appendChild(benefit);
+
+    [title, notice, explanation, benefit].forEach(function (element) {
+        schemeDetails.appendChild(element);
+    });
 
     renderEligibilityAnalysis(result);
 
@@ -463,8 +407,7 @@ function showSchemeDetails(result) {
     });
 }
 
-
-/* 11. CREATE A LIST ITEM SAFELY */
+/* 11. CREATE LIST ITEMS SAFELY */
 
 function createListItem(text) {
     const item = document.createElement("li");
@@ -472,61 +415,60 @@ function createListItem(text) {
     return item;
 }
 
-
 /* 12. SHOW MATCHED, UNMET AND UNKNOWN CRITERIA */
 
 function renderEligibilityAnalysis(result) {
+    if (
+        !matchedList ||
+        !unmetList ||
+        !unknownList ||
+        !eligibilityPanel
+    ) {
+        return;
+    }
+
     matchedList.replaceChildren();
     unmetList.replaceChildren();
     unknownList.replaceChildren();
 
     result.matched.forEach(function (item) {
-        matchedList.appendChild(
-            createListItem(item.label)
-        );
+        matchedList.appendChild(createListItem(item.label));
     });
 
-    // Corrected: no unnecessary matchedListItem assignment.
     result.unmet.forEach(function (item) {
-        unmetList.appendChild(
-            createListItem(item.label)
-        );
+        unmetList.appendChild(createListItem(item.label));
     });
 
     result.unknown.forEach(function (item) {
-        unknownList.appendChild(
-            createListItem(item.label)
-        );
+        unknownList.appendChild(createListItem(item.label));
     });
 
     if (result.matched.length === 0) {
-        matchedList.appendChild(
-            createListItem("No criteria have been confirmed as matched.")
-        );
+        matchedList.appendChild(createListItem(
+            "No criteria have been confirmed as matched."
+        ));
     }
 
     if (result.unmet.length === 0) {
-        unmetList.appendChild(
-            createListItem("No unmet criteria identified in this demo.")
-        );
+        unmetList.appendChild(createListItem(
+            "No unmet criteria identified in this demo."
+        ));
     }
 
     if (result.unknown.length === 0) {
-        unknownList.appendChild(
-            createListItem("No unknown criteria in this demo record.")
-        );
+        unknownList.appendChild(createListItem(
+            "No unknown criteria in this demo record."
+        ));
     }
 
     eligibilityPanel.hidden = false;
 }
-
 
 /* 13. HANDLE FORM SUBMISSION */
 
 if (schemeForm) {
     schemeForm.addEventListener("submit", function (event) {
         event.preventDefault();
-
         showFormError("");
 
         if (!schemesLoaded) {
@@ -544,42 +486,39 @@ if (schemeForm) {
             return;
         }
 
-        const profile = formData.profile;
-
         currentResults = schemes
             .map(function (scheme) {
-                return evaluateScheme(scheme, profile);
+                return evaluateScheme(scheme, formData.profile);
             })
             .filter(function (result) {
                 return result.potentialMatch;
             });
 
-        categoryFilter.value = "all";
+        if (categoryFilter) categoryFilter.value = "all";
 
         renderResults();
 
-        resultsSection.hidden = false;
-
-        resultsSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        if (resultsSection) {
+            resultsSection.hidden = false;
+            resultsSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
     });
 }
 
-
-/* 14. HANDLE CATEGORY FILTER CHANGES */
+/* 14. CATEGORY FILTER */
 
 if (categoryFilter) {
     categoryFilter.addEventListener("change", renderResults);
 }
 
-
-/* 15. LET THE USER EDIT THEIR ANSWERS */
+/* 15. EDIT ANSWERS */
 
 if (editAnswersButton) {
     editAnswersButton.addEventListener("click", function () {
-        resultsSection.hidden = true;
+        if (resultsSection) resultsSection.hidden = true;
 
         const formSection = document.getElementById("find-schemes");
 
@@ -592,25 +531,25 @@ if (editAnswersButton) {
     });
 }
 
-
 /* 16. START AGAIN */
 
 if (startAgainButton) {
     startAgainButton.addEventListener("click", function () {
-        schemeForm.reset();
+        if (schemeForm) schemeForm.reset();
 
         showFormError("");
-
         currentResults = [];
 
-        categoryFilter.value = "all";
+        if (categoryFilter) categoryFilter.value = "all";
+        if (schemeResults) schemeResults.replaceChildren();
 
-        schemeResults.replaceChildren();
-        schemeDetails.replaceChildren();
+        if (schemeDetails) {
+            schemeDetails.replaceChildren();
+            schemeDetails.hidden = true;
+        }
 
-        resultsSection.hidden = true;
-        schemeDetails.hidden = true;
-        eligibilityPanel.hidden = true;
+        if (resultsSection) resultsSection.hidden = true;
+        if (eligibilityPanel) eligibilityPanel.hidden = true;
 
         updateStudentField();
 
@@ -625,18 +564,7 @@ if (startAgainButton) {
     });
 }
 
-
-/* 17. INITIAL SETUP */
-
-updateStudentField();
-
-console.log(
-    "SchemeMatch prototype loaded. " +
-    "The current scheme records are fictional demo data."
-);
-// ============================================
-// 18. CONNECT TO THE SCHEMEMATCH BACKEND
-// ============================================
+/* 17. CONVERT JSON RECORDS TO MATCHING FORMAT */
 
 function convertBackendScheme(scheme) {
     if (
@@ -646,27 +574,29 @@ function convertBackendScheme(scheme) {
         typeof scheme.category !== "string" ||
         typeof scheme.description !== "string"
     ) {
-        throw new Error("A scheme record is missing its name, category, or description.");
+        throw new Error(
+            "A scheme record is missing its name, category, or description."
+        );
     }
 
     const eligibility = scheme.eligibility &&
         typeof scheme.eligibility === "object"
         ? scheme.eligibility
         : {};
-    const criteria = [];
-    const hasAgeRange =
-        Number.isFinite(eligibility.minimumAge) &&
-        Number.isFinite(eligibility.maximumAge);
 
-    if (hasAgeRange) {
+    const criteria = [];
+
+    if (
+        Number.isFinite(eligibility.minimumAge) &&
+        Number.isFinite(eligibility.maximumAge)
+    ) {
         criteria.push({
             key: "age",
             type: "range",
             min: eligibility.minimumAge,
             max: eligibility.maximumAge,
             label: "Age must be between " +
-                eligibility.minimumAge +
-                " and " +
+                eligibility.minimumAge + " and " +
                 eligibility.maximumAge
         });
     } else {
@@ -745,7 +675,7 @@ function convertBackendScheme(scheme) {
         });
     }
 
-    const backendBenefit = scheme.benefit &&
+    const benefit = scheme.benefit &&
         typeof scheme.benefit === "object"
         ? scheme.benefit
         : {};
@@ -757,37 +687,45 @@ function convertBackendScheme(scheme) {
         description: scheme.description,
         criteria: criteria,
         benefit: {
-            description: typeof backendBenefit.description === "string"
-                ? backendBenefit.description
+            description: typeof benefit.description === "string"
+                ? benefit.description
                 : "",
-            amountINR: Number.isFinite(backendBenefit.amountINR)
-                ? backendBenefit.amountINR
+            amountINR: Number.isFinite(benefit.amountINR)
+                ? benefit.amountINR
                 : null,
-            fictionalAmount: backendBenefit.fictionalAmount === true
+            fictionalAmount: benefit.fictionalAmount === true
         },
         fictional: scheme.fictional === true,
         verified: false
     };
 }
 
+/* 18. BUILD THE CATEGORY FILTER */
+
 function updateCategoryOptions() {
+    if (!categoryFilter) return;
+
     const selectedCategory = categoryFilter.value;
-    const categories = Array.from(new Set(schemes.map(function (scheme) {
-        return scheme.category;
-    }))).sort();
+
+    const categories = Array.from(new Set(
+        schemes.map(function (scheme) {
+            return scheme.category;
+        })
+    )).sort();
 
     categoryFilter.replaceChildren();
 
-    const allCategoriesOption = document.createElement("option");
-    allCategoriesOption.value = "all";
-    allCategoriesOption.textContent = "All categories";
-    categoryFilter.appendChild(allCategoriesOption);
+    const allOption = document.createElement("option");
+    allOption.value = "all";
+    allOption.textContent = "All categories";
+    categoryFilter.appendChild(allOption);
 
     categories.forEach(function (category) {
         const option = document.createElement("option");
         option.value = category;
         option.textContent =
             category.charAt(0).toUpperCase() + category.slice(1);
+
         categoryFilter.appendChild(option);
     });
 
@@ -796,64 +734,75 @@ function updateCategoryOptions() {
         : "all";
 }
 
+/* 19. LOAD SCHEMES FROM THE FRONTEND JSON FILE
+   Place schemes.json beside index.html and script.js. */
+
 async function loadSchemesFromBackend() {
-    if (submitButton) {
-        submitButton.disabled = true;
-    }
+    if (submitButton) submitButton.disabled = true;
 
     try {
-        console.log("Connecting to the SchemeMatch backend...");
+        console.log("Loading SchemeMatch demo schemes...");
 
-        const response = await fetch(
-            "http://127.0.0.1:5000/api/schemes"
-        );
+        const response = await fetch("./schemes.json");
 
         if (!response.ok) {
-            throw new Error("Could not load schemes from the backend.");
+            throw new Error(
+                "Could not load schemes.json. HTTP status: " +
+                response.status
+            );
         }
 
         const data = await response.json();
 
-        if (
-            !data ||
-            !Array.isArray(data.schemes) ||
-            data.schemes.length === 0
-        ) {
+        // Supports a direct JSON array or { "schemes": [...] }.
+        const schemeRecords = Array.isArray(data)
+            ? data
+            : data && Array.isArray(data.schemes)
+                ? data.schemes
+                : null;
+
+        if (!schemeRecords || schemeRecords.length === 0) {
             throw new Error(
-                "The API response does not contain a non-empty schemes list."
+                "The JSON file does not contain any schemes."
             );
         }
 
-        schemes = data.schemes.map(convertBackendScheme);
+        schemes = schemeRecords.map(convertBackendScheme);
+
         updateCategoryOptions();
+
         schemesLoaded = true;
         schemeLoadError = "";
 
-        if (submitButton) {
-            submitButton.disabled = false;
-        }
+        if (submitButton) submitButton.disabled = false;
 
         showFormError("");
 
         console.log(
-            "SchemeMatch backend connected successfully. Loaded " +
-            schemes.length +
+            "Successfully loaded " + schemes.length +
             " fictional demo schemes."
         );
-
     } catch (error) {
+        schemesLoaded = false;
+
         schemeLoadError =
-            "Could not load demo schemes. Make sure Flask is running at " +
-            "http://127.0.0.1:5000, then refresh this page.";
+            "Could not load demo schemes. Check that schemes.json " +
+            "is inside the frontend folder.";
+
         showFormError(schemeLoadError);
 
         console.error(
-            "SchemeMatch backend connection failed. Check Flask and " +
-            "http://127.0.0.1:5000/api/schemes.",
+            "SchemeMatch demo data loading failed:",
             error
         );
     }
 }
 
-// Prevent submissions until the backend records have replaced the old data.
+/* 20. INITIALIZE */
+
+updateStudentField();
 loadSchemesFromBackend();
+
+console.log(
+    "SchemeMatch prototype loaded. Scheme records are fictional demo data."
+);
