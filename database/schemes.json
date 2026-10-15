@@ -1,0 +1,632 @@
+[
+  {
+    "id": "EDU001",
+    "name": "Bright Future Student Grant",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample educational assistance for students.",
+    "eligibility": {
+      "minimumAge": 16,
+      "maximumAge": 25,
+      "maximumAnnualFamilyIncome": 300000,
+      "occupation": ["student"],
+      "states": ["Andhra Pradesh", "All India"]
+    },
+    "benefit": {
+      "description": "Sample education grant",
+      "amountINR": 10000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample income certificate", "Sample student ID"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "EDU002",
+    "name": "Digital Learner Device Support",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample support for students who need a learning device.",
+    "eligibility": {
+      "minimumAge": 16,
+      "maximumAge": 28,
+      "maximumAnnualFamilyIncome": 400000,
+      "occupation": ["student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample device assistance",
+      "amountINR": 15000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample student ID", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "EDU003",
+    "name": "Books for Tomorrow Fund",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample assistance for textbooks and study materials.",
+    "eligibility": {
+      "minimumAge": 15,
+      "maximumAge": 24,
+      "maximumAnnualFamilyIncome": 250000,
+      "occupation": ["student"],
+      "states": ["Andhra Pradesh", "Telangana"]
+    },
+    "benefit": {
+      "description": "Sample book allowance",
+      "amountINR": 3000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample student ID", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "EDU004",
+    "name": "First Generation Learner Award",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample grant for first-generation college learners.",
+    "eligibility": {
+      "minimumAge": 17,
+      "maximumAge": 26,
+      "maximumAnnualFamilyIncome": 350000,
+      "occupation": ["student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample study grant",
+      "amountINR": 12000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample student ID", "Sample income certificate", "Sample family declaration"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "EDU005",
+    "name": "STEM Explorer Fund",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample support for science, technology, engineering and mathematics learners.",
+    "eligibility": {
+      "minimumAge": 16,
+      "maximumAge": 25,
+      "maximumAnnualFamilyIncome": 500000,
+      "occupation": ["student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample STEM learning grant",
+      "amountINR": 8000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample student ID", "Sample course details"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "EDU006",
+    "name": "Campus Skills Starter Award",
+    "fictional": true,
+    "category": "education",
+    "description": "Sample assistance for students taking additional learning courses.",
+    "eligibility": {
+      "minimumAge": 17,
+      "maximumAge": 29,
+      "maximumAnnualFamilyIncome": 450000,
+      "occupation": ["student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample course-fee assistance",
+      "amountINR": 5000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample student ID", "Sample course enrolment proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "WOM001",
+    "name": "Women Entrepreneur Launch Fund",
+    "fictional": true,
+    "category": "women",
+    "description": "Sample support for women planning a small business.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 55,
+      "maximumAnnualFamilyIncome": 500000,
+      "occupation": ["self-employed", "unemployed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample business-startup assistance",
+      "amountINR": 25000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample income certificate", "Sample business plan"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "WOM002",
+    "name": "Women in Technology Starter Grant",
+    "fictional": true,
+    "category": "women",
+    "description": "Sample support for women learning technology skills.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 35,
+      "maximumAnnualFamilyIncome": 450000,
+      "occupation": ["student", "unemployed", "employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample technology training assistance",
+      "amountINR": 10000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample course enrolment proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "WOM003",
+    "name": "Home Business Growth Support",
+    "fictional": true,
+    "category": "women",
+    "description": "Sample support for women operating a small home-based enterprise.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 60,
+      "maximumAnnualFamilyIncome": 400000,
+      "occupation": ["self-employed"],
+      "states": ["Andhra Pradesh", "Karnataka", "Tamil Nadu"]
+    },
+    "benefit": {
+      "description": "Sample enterprise development assistance",
+      "amountINR": 18000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample business description"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "WOM004",
+    "name": "Women Return-to-Work Programme",
+    "fictional": true,
+    "category": "women",
+    "description": "Sample career-restart support after a break from employment.",
+    "eligibility": {
+      "minimumAge": 25,
+      "maximumAge": 50,
+      "maximumAnnualFamilyIncome": 600000,
+      "occupation": ["unemployed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample retraining assistance",
+      "amountINR": 12000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample training enrolment proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "WOM005",
+    "name": "Women Artisan Market Access Grant",
+    "fictional": true,
+    "category": "women",
+    "description": "Sample support for women making and selling handmade products.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 60,
+      "maximumAnnualFamilyIncome": 500000,
+      "occupation": ["self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample tools and market access assistance",
+      "amountINR": 14000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample work portfolio"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "FAM001",
+    "name": "Household Essentials Support",
+    "fictional": true,
+    "category": "general",
+    "description": "Sample support for households with limited annual income.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 75,
+      "maximumAnnualFamilyIncome": 180000,
+      "occupation": ["employed", "unemployed", "self-employed", "student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample household support",
+      "amountINR": 6000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample address proof", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "FAM002",
+    "name": "Family Emergency Relief Demo",
+    "fictional": true,
+    "category": "general",
+    "description": "Sample emergency assistance for qualifying households.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 75,
+      "maximumAnnualFamilyIncome": 250000,
+      "occupation": ["employed", "unemployed", "self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample emergency assistance",
+      "amountINR": 8000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample address proof", "Sample emergency expense statement"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "FAM003",
+    "name": "Rural Household Improvement Fund",
+    "fictional": true,
+    "category": "general",
+    "description": "Sample support for eligible rural households.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 70,
+      "maximumAnnualFamilyIncome": 220000,
+      "occupation": ["employed", "unemployed", "self-employed"],
+      "states": ["Andhra Pradesh", "Telangana", "Karnataka"]
+    },
+    "benefit": {
+      "description": "Sample household improvement grant",
+      "amountINR": 12000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample address proof", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "FAM004",
+    "name": "Caregiver Support Demo",
+    "fictional": true,
+    "category": "general",
+    "description": "Sample support for people providing regular family care.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 65,
+      "maximumAnnualFamilyIncome": 300000,
+      "occupation": ["employed", "unemployed", "self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample caregiver assistance",
+      "amountINR": 7000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample income certificate", "Sample caregiving declaration"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "FAM005",
+    "name": "Community Living Assistance",
+    "fictional": true,
+    "category": "general",
+    "description": "Sample assistance for qualifying people managing household expenses.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 65,
+      "maximumAnnualFamilyIncome": 200000,
+      "occupation": ["employed", "unemployed", "self-employed", "student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample living-cost assistance",
+      "amountINR": 5000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample address proof", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "JOB001",
+    "name": "First Job Readiness Grant",
+    "fictional": true,
+    "category": "employment",
+    "description": "Sample career preparation support for job seekers.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 30,
+      "maximumAnnualFamilyIncome": 400000,
+      "occupation": ["unemployed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample job-readiness training",
+      "amountINR": 6000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample education certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "JOB002",
+    "name": "Digital Skills Certification Fund",
+    "fictional": true,
+    "category": "employment",
+    "description": "Sample assistance for job-focused digital certification.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 40,
+      "maximumAnnualFamilyIncome": 500000,
+      "occupation": ["unemployed", "employed", "student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample certification support",
+      "amountINR": 7500,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample course details"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "JOB003",
+    "name": "Local Enterprise Skills Programme",
+    "fictional": true,
+    "category": "employment",
+    "description": "Sample practical skills training for local employment.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 45,
+      "maximumAnnualFamilyIncome": 350000,
+      "occupation": ["unemployed", "self-employed"],
+      "states": ["Andhra Pradesh", "Tamil Nadu", "Telangana"]
+    },
+    "benefit": {
+      "description": "Sample training assistance",
+      "amountINR": 9000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample residence proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "JOB004",
+    "name": "Career Restart Learning Fund",
+    "fictional": true,
+    "category": "employment",
+    "description": "Sample learning assistance for adults returning to work.",
+    "eligibility": {
+      "minimumAge": 25,
+      "maximumAge": 50,
+      "maximumAnnualFamilyIncome": 600000,
+      "occupation": ["unemployed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample reskilling allowance",
+      "amountINR": 11000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample course enrolment proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "JOB005",
+    "name": "Young Innovator Project Grant",
+    "fictional": true,
+    "category": "employment",
+    "description": "Sample support for young adults developing a project or prototype.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 32,
+      "maximumAnnualFamilyIncome": 500000,
+      "occupation": ["student", "unemployed", "self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample project development grant",
+      "amountINR": 20000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample project proposal"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "HLT001",
+    "name": "Family Wellness Expense Fund",
+    "fictional": true,
+    "category": "health",
+    "description": "Sample support for eligible household healthcare expenses.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 75,
+      "maximumAnnualFamilyIncome": 250000,
+      "occupation": ["employed", "unemployed", "self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample healthcare expense assistance",
+      "amountINR": 10000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample income certificate", "Sample expense statement"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "HLT002",
+    "name": "Accessible Living Equipment Grant",
+    "fictional": true,
+    "category": "health",
+    "description": "Sample support for accessibility equipment.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 75,
+      "maximumAnnualFamilyIncome": 400000,
+      "occupation": ["employed", "unemployed", "self-employed", "student"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample accessibility equipment assistance",
+      "amountINR": 15000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample needs assessment"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "HLT003",
+    "name": "Community Health Travel Support",
+    "fictional": true,
+    "category": "health",
+    "description": "Sample assistance for travel related to healthcare.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 75,
+      "maximumAnnualFamilyIncome": 200000,
+      "occupation": ["employed", "unemployed", "self-employed", "student"],
+      "states": ["Andhra Pradesh", "Telangana"]
+    },
+    "benefit": {
+      "description": "Sample travel assistance",
+      "amountINR": 4000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample appointment proof", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "HLT004",
+    "name": "Wellbeing Access Support",
+    "fictional": true,
+    "category": "health",
+    "description": "Sample support for accessing wellbeing services.",
+    "eligibility": {
+      "minimumAge": 16,
+      "maximumAge": 65,
+      "maximumAnnualFamilyIncome": 300000,
+      "occupation": ["student", "employed", "unemployed", "self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample wellbeing service assistance",
+      "amountINR": 5000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample income certificate"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "RUR001",
+    "name": "Small Farmer Tools Support",
+    "fictional": true,
+    "category": "rural",
+    "description": "Sample support for small-scale farming tools.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 70,
+      "maximumAnnualFamilyIncome": 350000,
+      "occupation": ["self-employed"],
+      "states": ["Andhra Pradesh", "Telangana", "Karnataka"]
+    },
+    "benefit": {
+      "description": "Sample farming tool assistance",
+      "amountINR": 12000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample farming activity declaration"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "RUR002",
+    "name": "Village Enterprise Starter Fund",
+    "fictional": true,
+    "category": "rural",
+    "description": "Sample support for starting a small rural enterprise.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 60,
+      "maximumAnnualFamilyIncome": 400000,
+      "occupation": ["self-employed", "unemployed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample enterprise starter assistance",
+      "amountINR": 18000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample business plan", "Sample address proof"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "RUR003",
+    "name": "Water-Smart Farming Demo",
+    "fictional": true,
+    "category": "rural",
+    "description": "Sample assistance for learning water-efficient farming practices.",
+    "eligibility": {
+      "minimumAge": 21,
+      "maximumAge": 70,
+      "maximumAnnualFamilyIncome": 450000,
+      "occupation": ["self-employed"],
+      "states": ["Andhra Pradesh", "Tamil Nadu", "Karnataka"]
+    },
+    "benefit": {
+      "description": "Sample training and equipment support",
+      "amountINR": 10000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample farming activity declaration"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "RUR004",
+    "name": "Local Artisan Livelihood Fund",
+    "fictional": true,
+    "category": "rural",
+    "description": "Sample assistance for traditional crafts and local livelihoods.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 65,
+      "maximumAnnualFamilyIncome": 350000,
+      "occupation": ["self-employed"],
+      "states": ["All India"]
+    },
+    "benefit": {
+      "description": "Sample tools and materials assistance",
+      "amountINR": 8000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample work portfolio"],
+    "verificationStatus": "fictional_demo"
+  },
+  {
+    "id": "RUR005",
+    "name": "Sustainable Livelihood Skills Grant",
+    "fictional": true,
+    "category": "rural",
+    "description": "Sample support for learning sustainable livelihood skills.",
+    "eligibility": {
+      "minimumAge": 18,
+      "maximumAge": 55,
+      "maximumAnnualFamilyIncome": 300000,
+      "occupation": ["unemployed", "self-employed"],
+      "states": ["Andhra Pradesh", "Telangana", "Odisha"]
+    },
+    "benefit": {
+      "description": "Sample livelihood training assistance",
+      "amountINR": 7000,
+      "fictionalAmount": true
+    },
+    "documentsRequired": ["Sample identity document", "Sample training enrolment proof"],
+    "verificationStatus": "fictional_demo"
+  }
+]
