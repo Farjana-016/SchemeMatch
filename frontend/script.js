@@ -273,16 +273,17 @@ function createSchemeCard(result) {
     category.textContent = scheme.category;
 
     const benefit = document.createElement("p");
+    benefit.className = "scheme-benefit";
     benefit.textContent = "Sample benefit: " +
         getBenefitSummary(scheme.benefit);
 
     const demoNotice = document.createElement("p");
-    demoNotice.className = "scheme-status";
+    demoNotice.className = "scheme-status scheme-status-demo";
     demoNotice.textContent =
         "Demo example — not a verified government scheme.";
 
     const status = document.createElement("p");
-    status.className = "scheme-status";
+    status.className = "scheme-status scheme-status-match";
 
     if (result.unknown.length > 0) {
         status.textContent =
@@ -293,10 +294,12 @@ function createSchemeCard(result) {
     }
 
     const matchedText = document.createElement("p");
+    matchedText.className = "scheme-stat scheme-stat-matched";
     matchedText.textContent =
         "Criteria matched: " + result.matched.length;
 
     const unknownText = document.createElement("p");
+    unknownText.className = "scheme-stat scheme-stat-unknown";
     unknownText.textContent =
         "Criteria needing verification: " + result.unknown.length;
 
@@ -310,9 +313,9 @@ function createSchemeCard(result) {
     });
 
     [
+        category,
         title,
         description,
-        category,
         benefit,
         demoNotice,
         status,
@@ -349,11 +352,10 @@ function renderResults() {
 
     if (filteredResults.length === 0) {
         noResults.hidden = false;
-        noResults.textContent =
-            "No potential matches were found in this demo dataset. " +
-            "Try changing your answers or category filter.";
+        schemeResults.hidden = true;
     } else {
         noResults.hidden = true;
+        schemeResults.hidden = false;
 
         filteredResults.forEach(function (result) {
             schemeResults.appendChild(createSchemeCard(result));
@@ -365,8 +367,16 @@ function renderResults() {
         " potential demo match(es) found. These examples are fictional " +
         "and do not confirm eligibility.";
 
-    if (schemeDetails) schemeDetails.hidden = true;
-    if (eligibilityPanel) eligibilityPanel.hidden = true;
+    if (schemeDetails) {
+        schemeDetails.replaceChildren();
+        schemeDetails.hidden = true;
+    }
+    if (eligibilityPanel) {
+        if (matchedList) matchedList.replaceChildren();
+        if (unmetList) unmetList.replaceChildren();
+        if (unknownList) unknownList.replaceChildren();
+        eligibilityPanel.hidden = true;
+    }
 }
 
 /* 10. SHOW SCHEME DETAILS */
@@ -383,15 +393,18 @@ function showSchemeDetails(result) {
     title.textContent = scheme.name;
 
     const notice = document.createElement("p");
+    notice.className = "scheme-details-notice";
     notice.textContent =
         "This is fictional demo data, not an official government scheme.";
 
     const explanation = document.createElement("p");
+    explanation.className = "scheme-details-explanation";
     explanation.textContent =
         "Review these criteria classifications. A match against demo " +
         "criteria does not establish actual eligibility.";
 
     const benefit = document.createElement("p");
+    benefit.className = "scheme-details-benefit";
     benefit.textContent = "Fictional sample benefit: " +
         getBenefitSummary(scheme.benefit);
 
@@ -401,10 +414,12 @@ function showSchemeDetails(result) {
 
     renderEligibilityAnalysis(result);
 
+    schemeDetails.setAttribute("tabindex", "-1");
     schemeDetails.scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
+    schemeDetails.focus({ preventScroll: true });
 }
 
 /* 11. CREATE LIST ITEMS SAFELY */
@@ -504,6 +519,10 @@ if (schemeForm) {
                 behavior: "smooth",
                 block: "start"
             });
+            if (resultsSummary) {
+                resultsSummary.setAttribute("tabindex", "-1");
+                resultsSummary.focus({ preventScroll: true });
+            }
         }
     });
 }
@@ -516,20 +535,43 @@ if (categoryFilter) {
 
 /* 15. EDIT ANSWERS */
 
-if (editAnswersButton) {
-    editAnswersButton.addEventListener("click", function () {
-        if (resultsSection) resultsSection.hidden = true;
+function handleEditAnswers() {
+    if (resultsSection) resultsSection.hidden = true;
 
-        const formSection = document.getElementById("find-schemes");
+    if (schemeDetails) {
+        schemeDetails.replaceChildren();
+        schemeDetails.hidden = true;
+    }
 
-        if (formSection) {
-            formSection.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-    });
+    if (eligibilityPanel) {
+        if (matchedList) matchedList.replaceChildren();
+        if (unmetList) unmetList.replaceChildren();
+        if (unknownList) unknownList.replaceChildren();
+        eligibilityPanel.hidden = true;
+    }
+
+    showFormError("");
+
+    const formSection = document.getElementById("find-schemes");
+
+    if (formSection) {
+        formSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    if (ageInput) {
+        ageInput.focus({ preventScroll: true });
+    }
 }
+
+const editAnswersButtons = document.querySelectorAll(
+    "#edit-answers-button, #edit-answers-results-button"
+);
+editAnswersButtons.forEach(function (button) {
+    button.addEventListener("click", handleEditAnswers);
+});
 
 /* 16. START AGAIN */
 
@@ -542,14 +584,22 @@ if (startAgainButton) {
 
         if (categoryFilter) categoryFilter.value = "all";
         if (schemeResults) schemeResults.replaceChildren();
+        if (resultsSummary) resultsSummary.textContent = "";
 
         if (schemeDetails) {
             schemeDetails.replaceChildren();
             schemeDetails.hidden = true;
         }
 
+        if (eligibilityPanel) {
+            if (matchedList) matchedList.replaceChildren();
+            if (unmetList) unmetList.replaceChildren();
+            if (unknownList) unknownList.replaceChildren();
+            eligibilityPanel.hidden = true;
+        }
+
+        if (noResults) noResults.hidden = true;
         if (resultsSection) resultsSection.hidden = true;
-        if (eligibilityPanel) eligibilityPanel.hidden = true;
 
         updateStudentField();
 
@@ -560,6 +610,10 @@ if (startAgainButton) {
                 behavior: "smooth",
                 block: "start"
             });
+        }
+
+        if (ageInput) {
+            ageInput.focus({ preventScroll: true });
         }
     });
 }
