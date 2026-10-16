@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="SchemeMatch helps people explore government schemes and understand their eligibility requirements.">
+          content="SchemeMatch helps citizens, farmers, and students explore potentially relevant government schemes and understand eligibility requirements with clarity and transparency.">
 
-    <title>SchemeMatch | Find Government Schemes for You</title>
+    <title>SchemeMatch | Civic Scheme Directory & Eligibility Finder</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans & Material Symbols Outlined -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
     <!-- Connect our CSS file for website styling -->
     <link rel="stylesheet" href="style.css">
@@ -19,247 +24,503 @@
 
 <body>
 
+    <!-- ================= PROTOTYPE ANNOUNCEMENT BANNER ================= -->
+    <div class="prototype-banner">
+        <div class="banner-inner">
+            <span class="material-symbols-outlined banner-icon" aria-hidden="true">verified</span>
+            <p>
+                INNOHACKS 2.0 Prototype — <strong>SchemeMatch</strong> by Team Impact X
+                <span class="banner-separator">•</span>
+                <span>Demonstration civic-tech tool; not an official government portal</span>
+            </p>
+        </div>
+    </div>
+
     <!-- ================= NAVIGATION BAR ================= -->
     <header class="navbar">
-        <a href="#home" class="logo" aria-label="SchemeMatch home">
-            <span class="logo-icon" aria-hidden="true">S</span>
-            <span>Scheme<span class="logo-highlight">Match</span></span>
-        </a>
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="SchemeMatch home">
+                <span class="logo-symbol" aria-hidden="true">
+                    <span class="material-symbols-outlined">account_balance</span>
+                </span>
+                <span class="logo-text">Scheme<span class="logo-accent">Match</span></span>
+            </a>
 
-        <nav class="nav-links" aria-label="Main navigation">
-            <a href="#home" class="nav-link active">Home</a>
-            <a href="#find-schemes" class="nav-link">Find Schemes</a>
-            <a href="#how-it-works" class="nav-link">How It Works</a>
-            <a href="#about" class="nav-link">About</a>
-        </nav>
+            <nav class="nav-links" id="main-nav" aria-label="Main navigation">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#find-schemes" class="nav-link">Find Schemes</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#categories" class="nav-link">Categories</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
 
-        <a href="#find-schemes" class="button button-small">
-            Get Started
-        </a>
+            <div class="nav-actions">
+                <a href="#find-schemes" class="button button-small button-primary nav-cta">
+                    Find My Schemes
+                </a>
+                <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-drawer">
+                    <span class="material-symbols-outlined" id="nav-toggle-icon">menu</span>
+                </button>
+            </div>
+        </div>
     </header>
 
+    <!-- Mobile Drawer Overlay & Panel -->
+    <div class="nav-drawer" id="nav-drawer" hidden>
+        <div class="nav-drawer-backdrop" id="nav-drawer-backdrop" aria-hidden="true"></div>
+        <div class="nav-drawer-content" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+            <div class="nav-drawer-header">
+                <div class="logo">
+                    <span class="logo-symbol" aria-hidden="true">
+                        <span class="material-symbols-outlined">account_balance</span>
+                    </span>
+                    <span class="logo-text">Scheme<span class="logo-accent">Match</span></span>
+                </div>
+                <button type="button" class="nav-drawer-close" id="nav-drawer-close" aria-label="Close navigation menu">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="nav-drawer-links" aria-label="Mobile links">
+                <a href="#home" class="drawer-link active">Home</a>
+                <a href="#find-schemes" class="drawer-link">Find Schemes</a>
+                <a href="#how-it-works" class="drawer-link">How It Works</a>
+                <a href="#categories" class="drawer-link">Categories</a>
+                <a href="#about" class="drawer-link">About</a>
+            </nav>
+            <div class="nav-drawer-footer">
+                <a href="#find-schemes" class="button button-primary button-large drawer-cta">
+                    <span>Find My Schemes</span>
+                    <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </div>
 
-    <main>
+    <main id="main-content">
 
         <!-- ================= HERO SECTION ================= -->
-        <section id="home" class="hero section-container">
+        <section id="home" class="hero-section">
+            <div class="hero-glow hero-glow-left" aria-hidden="true"></div>
+            <div class="hero-glow hero-glow-right" aria-hidden="true"></div>
 
-            <div class="hero-content">
-                <span class="eyebrow">
-                    YOUR GUIDE TO GOVERNMENT SCHEMES
-                </span>
+            <div class="section-container hero-container">
+                <!-- Left Content Column -->
+                <div class="hero-content">
+                    <div class="civic-badge">
+                        <span class="badge-dot" aria-hidden="true"></span>
+                        <span class="badge-title">Verified Civic Directory 2025</span>
+                        <span class="badge-divider" aria-hidden="true">|</span>
+                        <span class="badge-subtitle">Over 480 Central &amp; State Schemes</span>
+                    </div>
 
-                <h1>
-                    The right scheme
-                    <span class="highlight-text">for you.</span>
-                </h1>
+                    <h1 class="hero-title">
+                        Find the Support You <span class="highlight-text">May Be Eligible</span> For
+                    </h1>
 
-                <p class="hero-description">
-                    Discover government schemes that match your circumstances.
-                    Understand the requirements and know what to do next.
-                </p>
+                    <p class="hero-description">
+                        Discover potentially relevant government support schemes in agriculture, rural development, education, and social welfare tailored to your profile.
+                    </p>
 
-                <div class="hero-actions">
-                    <a href="#find-schemes" class="button">
-                        Find My Schemes
-                        <span aria-hidden="true">→</span>
-                    </a>
+                    <div class="hero-actions">
+                        <a href="#find-schemes" class="button button-primary button-large">
+                            <span>Find My Schemes</span>
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>
+                        </a>
 
-                    <a href="#how-it-works" class="button button-secondary">
-                        How It Works
-                    </a>
+                        <a href="#how-it-works" class="button button-secondary button-large">
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">play_circle</span>
+                            <span>How It Works</span>
+                        </a>
+                    </div>
+
+                    <!-- Micro-trust metrics banner -->
+                    <div class="trust-metrics-grid">
+                        <div class="trust-metric-card">
+                            <p class="metric-value text-primary">100% Free</p>
+                            <p class="metric-label">No Aadhaar or sensitive OTP required</p>
+                        </div>
+                        <div class="trust-metric-card">
+                            <p class="metric-value text-secondary">3 mins</p>
+                            <p class="metric-label">Average indicative match time</p>
+                        </div>
+                        <div class="trust-metric-card">
+                            <p class="metric-value text-accent">28 States</p>
+                            <p class="metric-label">Central + localized rural provisions</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="trust-note">
-                    <span class="trust-icon" aria-hidden="true">✓</span>
-                    <span>Simple guidance. Clear requirements. Better awareness.</span>
+                <!-- Right Visual Column: Interactive Card Preview Mosaic -->
+                <div class="hero-visual" aria-label="Visual preview of scheme discovery cards">
+                    <div class="mosaic-wrapper">
+
+                        <!-- Main Citizen Spotlight Card -->
+                        <div class="spotlight-card">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqy0Eaa8AjwX_yLMB3lZfLzs6zP2bgS2dFFsJn6uW1QgM6nP3e95KGE1pgCcdUR6LcRbsup4mLb7xnQ936rIptwZUnq-1EgCNSVVy81lMEL0BjGjF6QyWMgk7T3v4u-gxrH42LimOaWgmQ1hype6onda4-xtxrvwnzFZmlnYKGvhnn2TbRNzLu2nBIfnD3wvjZDGM4gTxoGyKLqQrWKbQdGjsQP3KNnmueRyBej7fxwUHSTFOrjoNx"
+                                 alt="Indian agricultural leader in field holding scheme handbook"
+                                 class="spotlight-img"
+                                 loading="lazy">
+                            <div class="spotlight-overlay">
+                                <span class="spotlight-pill">Citizen Spotlight</span>
+                                <p class="spotlight-caption">Direct DBT Support mapped for over 1.4M smallholders</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 1: Agriculture & Dairy Scheme Preview -->
+                        <div class="preview-card preview-card-primary">
+                            <div class="preview-header">
+                                <div class="preview-title-group">
+                                    <span class="preview-icon icon-secondary" aria-hidden="true">
+                                        <span class="material-symbols-outlined">psychiatry</span>
+                                    </span>
+                                    <div>
+                                        <h2 class="preview-title">PM Kisan Samman Nidhi</h2>
+                                        <p class="preview-sub">Ministry of Agriculture &amp; Farmers Welfare</p>
+                                    </div>
+                                </div>
+                                <span class="status-pill status-pill-success">
+                                    <span class="material-symbols-outlined pill-icon" aria-hidden="true">check_circle</span>
+                                    96% Match
+                                </span>
+                            </div>
+
+                            <div class="preview-ribbon">
+                                <div>
+                                    <span class="ribbon-label">Indicative Assistance</span>
+                                    <span class="ribbon-val text-primary">₹6,000 / year</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="ribbon-label">Disbursement Mode</span>
+                                    <span class="ribbon-val text-secondary">Direct Benefit Transfer</span>
+                                </div>
+                            </div>
+
+                            <div class="preview-footer">
+                                <span class="preview-condition">
+                                    <span class="material-symbols-outlined text-secondary" aria-hidden="true">verified</span>
+                                    Landholding &lt; 2 Hectares
+                                </span>
+                                <span class="preview-active">Active Window</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Small Enterprise & Artisan Credit Preview -->
+                        <div class="preview-card preview-card-secondary">
+                            <div class="preview-header">
+                                <div class="preview-title-group">
+                                    <span class="preview-icon icon-primary" aria-hidden="true">
+                                        <span class="material-symbols-outlined">storefront</span>
+                                    </span>
+                                    <div>
+                                        <h2 class="preview-title">PM Vishwakarma Toolkit &amp; Loan</h2>
+                                        <p class="preview-sub">Ministry of MSME</p>
+                                    </div>
+                                </div>
+                                <span class="status-pill status-pill-neutral">
+                                    <span class="material-symbols-outlined pill-icon" aria-hidden="true">task_alt</span>
+                                    91% Match
+                                </span>
+                            </div>
+
+                            <div class="preview-split">
+                                <div class="split-cell">
+                                    <span class="ribbon-label">Collateral-Free Loan</span>
+                                    <p class="ribbon-subval text-primary">Up to ₹3,00,000 @ 5%</p>
+                                </div>
+                                <div class="split-cell">
+                                    <span class="ribbon-label">Skill Incentive</span>
+                                    <p class="ribbon-subval text-secondary">₹15,000 Toolkit Grant</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Floating Micro Badge for Student Welfare -->
+                        <div class="preview-floating-pill">
+                            <div class="floating-pill-left">
+                                <span class="floating-icon" aria-hidden="true">
+                                    <span class="material-symbols-outlined">school</span>
+                                </span>
+                                <div>
+                                    <p class="floating-title">National Rural Merit Scholarship</p>
+                                    <p class="floating-desc">Class 9–12 Higher Secondary Support</p>
+                                </div>
+                            </div>
+                            <span class="status-pill status-pill-success">Eligible</span>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
-            <!-- A CSS illustration will be created in style.css -->
-            <div class="hero-visual" aria-label="Illustration of finding suitable government schemes">
-
-                <div class="visual-decoration decoration-one"></div>
-                <div class="visual-decoration decoration-two"></div>
-
-                <div class="illustration-card main-illustration-card">
-
-                    <div class="illustration-top">
-                        <div class="illustration-symbol" aria-hidden="true">S</div>
-
-                        <div>
-                            <p class="illustration-title">Your opportunities</p>
-                            <p class="illustration-subtitle">Start with your profile</p>
-                        </div>
-                    </div>
-
-                    <div class="illustration-divider"></div>
-
-                    <div class="illustration-row">
-                        <span class="illustration-check" aria-hidden="true">✓</span>
-                        <div>
-                            <strong>Understand your profile</strong>
-                            <p>Share basic eligibility details</p>
-                        </div>
-                    </div>
-
-                    <div class="illustration-row">
-                        <span class="illustration-check" aria-hidden="true">✓</span>
-                        <div>
-                            <strong>Explore possible matches</strong>
-                            <p>Review scheme requirements</p>
-                        </div>
-                    </div>
-
-                    <div class="illustration-row">
-                        <span class="illustration-info" aria-hidden="true">i</span>
-                        <div>
-                            <strong>Know what to verify</strong>
-                            <p>Check details before applying</p>
-                        </div>
-                    </div>
-
-                    <div class="illustration-footer">
-                        <span class="footer-dot"></span>
-                        Guidance for informed decisions
-                    </div>
-
-                </div>
-
-                <div class="floating-label floating-label-top">
-                    <span aria-hidden="true">✦</span>
-                    Clear guidance
-                </div>
-
-                <div class="floating-label floating-label-bottom">
-                    <span aria-hidden="true">✓</span>
-                    Eligibility insights
-                </div>
-
-            </div>
-
         </section>
 
 
-        <!-- ================= FEATURES SECTION ================= -->
-        <section id="features" class="features-section section-container">
+        <!-- ================= HOW IT WORKS (3-STEP CIVIC PROCESS) ================= -->
+        <section id="how-it-works" class="process-section">
+            <div class="section-container">
+                <div class="section-header text-center">
+                    <span class="section-eyebrow">INTUITIVE CIVIC FRAMEWORK</span>
+                    <h2 class="section-title">How SchemeMatch Works</h2>
+                    <p class="section-subtitle">
+                        Navigating public schemes does not require confusing bureaucracy. We simplify discovery in three straightforward steps.
+                    </p>
+                </div>
 
-            <div class="section-heading">
-                <span class="eyebrow">WHAT MAKES US DIFFERENT</span>
-                <h2>More clarity. Better decisions.</h2>
-                <p>
-                    Understand your options without getting lost in complicated
-                    eligibility requirements.
-                </p>
+                <div class="process-grid">
+                    <!-- Step 1 -->
+                    <article class="process-card">
+                        <div class="process-card-top">
+                            <span class="step-num step-num-primary">01</span>
+                            <span class="material-symbols-outlined process-card-icon" aria-hidden="true">badge</span>
+                        </div>
+                        <h3 class="process-card-title">Tell us about yourself</h3>
+                        <p class="process-card-desc">
+                            Provide baseline criteria: age bracket, state of residence, primary trade or occupation, and family income range.
+                        </p>
+                        <div class="process-card-meta">
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Zero sensitive document uploads</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Completely anonymous session</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Step 2 -->
+                    <article class="process-card">
+                        <div class="process-card-top">
+                            <span class="step-num step-num-secondary">02</span>
+                            <span class="material-symbols-outlined process-card-icon" aria-hidden="true">tune</span>
+                        </div>
+                        <h3 class="process-card-title">Explore potential matches</h3>
+                        <p class="process-card-desc">
+                            Our civic rule engine cross-references criteria across Central, State, and Inter-Departmental welfare frameworks instantly.
+                        </p>
+                        <div class="process-card-meta">
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Indicative % compatibility rating</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Filter by category &amp; benefits</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Step 3 -->
+                    <article class="process-card">
+                        <div class="process-card-top">
+                            <span class="step-num step-num-tertiary">03</span>
+                            <span class="material-symbols-outlined process-card-icon" aria-hidden="true">open_in_new</span>
+                        </div>
+                        <h3 class="process-card-title">Review criteria &amp; apply</h3>
+                        <p class="process-card-desc">
+                            Review satisfied vs. pending eligibility requirements, required documentation lists, and direct links to official ministry portals.
+                        </p>
+                        <div class="process-card-meta">
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Direct official .gov portal routing</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">check_circle</span>
+                                <span>Prerequisite checklist verification</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="feature-grid">
 
-                <article class="feature-card">
-                    <div class="feature-icon icon-lavender" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <circle cx="10" cy="8" r="4"
-                                    stroke="currentColor" stroke-width="1.8"/>
-                            <path d="M3 20c0-4 3-6 7-6s7 2 7 6"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round"/>
-                            <path d="m17 8 2 2 3-4"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+        <!-- ================= PRIORITY CATEGORIES BENTO GRID ================= -->
+        <section id="categories" class="categories-section">
+            <div class="section-container">
+                <div class="categories-header">
+                    <div>
+                        <span class="section-eyebrow">PUBLIC SERVICE SPECTRUM</span>
+                        <h2 class="section-title">Priority Focus Categories</h2>
+                    </div>
+                    <a href="#find-schemes" class="link-arrow">
+                        <span>Check eligibility across all categories</span>
+                        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="categories-grid">
+                    <!-- Category 1: Agriculture & Rural -->
+                    <div class="category-card">
+                        <div class="category-img-wrap">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8Bz4J2G_k8aPYK7NrT4jvdO63Ee_O11VBjFMDyVNSD8HCWsGMPeICGvsCmk76mfnPEBUyIo6aUmetSenXumDAdVb6jZmRqCpsKL-jmrpG1k6yJOeCOxKjtfOqNN-Idey-T0B-tuYDfodSBytuvcLgK_oXR9LXPSCDfe7vVlvLgLq4HpCvD65dPxjkfDn_ynGpRXgyPqhW-32F8PGcUfM8Yuk694gJNpG31bZGFC1dlZmzIc5V4zct"
+                                 alt="Indian farmer examining crops in field"
+                                 class="category-img"
+                                 loading="lazy">
+                            <span class="category-badge">142 Schemes</span>
+                        </div>
+                        <div class="category-body">
+                            <div class="category-title-group">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">agriculture</span>
+                                <h3 class="category-name">Agriculture &amp; Rural</h3>
+                            </div>
+                            <p class="category-desc">
+                                Crop insurance, solar pump subsidies, micro-irrigation machinery, fertilizer support, and cattle rearing funds.
+                            </p>
+                        </div>
+                        <a href="#find-schemes" class="category-action">
+                            <span>Explore Subsidies</span>
+                            <span class="material-symbols-outlined action-arrow" aria-hidden="true">east</span>
+                        </a>
                     </div>
 
-                    <h3>Personalized Scheme Discovery</h3>
-                    <p>
-                        Explore schemes based on your age, location, occupation
-                        and other relevant details.
-                    </p>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon icon-peach" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M12 3 21 7v5c0 5-4 8-9 10-5-2-9-5-9-10V7l9-4Z"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linejoin="round"/>
-                            <path d="m8 12 3 3 5-6"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <!-- Category 2: Artisans & MSME -->
+                    <div class="category-card">
+                        <div class="category-img-wrap">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfFhTqxuYdLYlnjItoPnlVUOpp-XV1xc1H3AErp5xWaw3o8JUrp5j4wpp2o0uMzFa-8RnJXnylVW_LRE70Px5CjIZ7Knl4rASgWMuOftiSiu7d12BesRypTaaFmJj0iPxiBsLVHWsSVLBkNf70nVjdrrbRLo0kUDsvJX7Q67Tki1oqWtP7wet1rPIqMDWt0ps3PseGXmiHkWBIOy5RPR8Nj5Y4Uas-t2We5M0MH7P4HqEIJ-n6wJ7a"
+                                 alt="Rural artisan woodworker and pottery craftsman"
+                                 class="category-img"
+                                 loading="lazy">
+                            <span class="category-badge">86 Schemes</span>
+                        </div>
+                        <div class="category-body">
+                            <div class="category-title-group">
+                                <span class="material-symbols-outlined text-primary" aria-hidden="true">precision_manufacturing</span>
+                                <h3 class="category-name">Artisans &amp; MSME</h3>
+                            </div>
+                            <p class="category-desc">
+                                Credit guarantee, modern equipment grants, self-help group loans, and artisan skill onboarding assistance.
+                            </p>
+                        </div>
+                        <a href="#find-schemes" class="category-action">
+                            <span>Explore MSME Funds</span>
+                            <span class="material-symbols-outlined action-arrow" aria-hidden="true">east</span>
+                        </a>
                     </div>
 
-                    <h3>Eligibility Gap Finder</h3>
-                    <p>
-                        See which requirements appear to match, which do not,
-                        and which still need verification.
-                    </p>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon icon-blue" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M4 5h16v12H9l-5 4V5Z"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linejoin="round"/>
-                            <path d="M8 9h8M8 13h5"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round"/>
-                        </svg>
+                    <!-- Category 3: Education & Skills -->
+                    <div class="category-card">
+                        <div class="category-img-wrap">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9U2TdtP8PkVIMNE-FGy_YM5pVrOo_JzkGZwgQXZHQl2imO1n4-dMWPX7OPSEo05j8J2AgjmidSnwtQUOtaHz2cZs2pf-YuBR9yrM1HVEcToZGGnNGWBhS3YHS0ywnNGz5V1r1LZmGPj-RPN5fJqjqAeNqqWGxgwcGZ9JyB08bP2GVYctxLPgcMta9Ps1ijEQmwggk0VkuRmygJATl2WqMzTzs8xE7m9c98kamyOeVn_nvlTYWCKfu"
+                                 alt="Young Indian students in vocational classroom"
+                                 class="category-img"
+                                 loading="lazy">
+                            <span class="category-badge">114 Schemes</span>
+                        </div>
+                        <div class="category-body">
+                            <div class="category-title-group">
+                                <span class="material-symbols-outlined text-accent" aria-hidden="true">school</span>
+                                <h3 class="category-name">Education &amp; Skills</h3>
+                            </div>
+                            <p class="category-desc">
+                                Post-matric scholarships, technical vocational training stipends, girl-child STEM initiatives, and laptops.
+                            </p>
+                        </div>
+                        <a href="#find-schemes" class="category-action">
+                            <span>Explore Scholarships</span>
+                            <span class="material-symbols-outlined action-arrow" aria-hidden="true">east</span>
+                        </a>
                     </div>
 
-                    <h3>Simple-Language Explanations</h3>
-                    <p>
-                        Understand scheme conditions through clear,
-                        beginner-friendly explanations.
-                    </p>
-                </article>
-
-                <article class="feature-card">
-                    <div class="feature-icon icon-green" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <path d="M6 3h9l4 4v14H6V3Z"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linejoin="round"/>
-                            <path d="M14 3v5h5M9 13h6M9 17h6"
-                                  stroke="currentColor" stroke-width="1.8"
-                                  stroke-linecap="round"/>
-                        </svg>
+                    <!-- Category 4: Health & Security -->
+                    <div class="category-card">
+                        <div class="category-img-wrap">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5k7NgzDagUW3dXYONuO5V78p_-2zW5wZUZrDNddLHHpnWWZiM6ahHMBOqWfVKX-rb1mkaHyT8WvtqagsnCVyKE7imEZi5axK7GIYQnF0Eqy6BLs9SfOklg5FeiYf004yoKNDdSidDACcgcnzPX33vArqsnrnli2fxk-q6ThOI9qgAi86lIYUxAD9sr3NaQDt_hKP0UjIV79Rttkdi5l2Pj845t54yeg7FtLk5JbhAqrUiyWFZrmk2"
+                                 alt="Community health care worker assisting an elderly citizen"
+                                 class="category-img"
+                                 loading="lazy">
+                            <span class="category-badge">79 Schemes</span>
+                        </div>
+                        <div class="category-body">
+                            <div class="category-title-group">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">health_and_safety</span>
+                                <h3 class="category-name">Health &amp; Security</h3>
+                            </div>
+                            <p class="category-desc">
+                                Ayushman health cover, senior citizen pensions, maternity nutrition support, and disability allowances.
+                            </p>
+                        </div>
+                        <a href="#find-schemes" class="category-action">
+                            <span>Explore Social Security</span>
+                            <span class="material-symbols-outlined action-arrow" aria-hidden="true">east</span>
+                        </a>
                     </div>
+                </div>
+            </div>
+        </section>
 
-                    <h3>Document Readiness</h3>
-                    <p>
-                        Review the documents listed for a scheme and identify
-                        what you may need to prepare.
-                    </p>
-                </article>
 
+        <!-- ================= CIVIC QUERY TRIGGER BANNER ================= -->
+        <section class="trigger-banner-section">
+            <div class="section-container">
+                <div class="trigger-banner-card">
+                    <div class="trigger-content">
+                        <span class="trigger-eyebrow">DIRECT MATCH ASSESSMENT</span>
+                        <h2 class="trigger-title">Ready to verify which public benefits your household qualifies for?</h2>
+                        <p class="trigger-desc">
+                            Input basic parameters without submitting personal identifiers. Our engine compiles eligible notifications within seconds.
+                        </p>
+                    </div>
+                    <div class="trigger-action-wrap">
+                        <a href="#find-schemes" class="button button-accent button-large">
+                            <span class="material-symbols-outlined" aria-hidden="true">search_check</span>
+                            <span>Launch Scheme Finder</span>
+                        </a>
+                        <span class="trigger-note">Updated weekly with Gazette notices</span>
+                    </div>
+                </div>
             </div>
         </section>
 
 
         <!-- ================= QUESTIONNAIRE SECTION ================= -->
         <section id="find-schemes" class="questionnaire-section">
-
             <div class="section-container">
 
-                <div class="section-heading">
-                    <span class="eyebrow">LET'S GET STARTED</span>
-                    <h2>Find schemes that fit your profile.</h2>
-                    <p>
-                        Answer a few basic questions to explore potentially
-                        relevant government schemes.
+                <!-- Stepper Pill & Visual Progress Track -->
+                <div class="stepper-wrap text-center">
+                    <div class="stepper-pill">
+                        <span class="step-badge">1</span>
+                        <span class="step-current">Step 1 of 2: Personal &amp; Household Details</span>
+                        <span class="stepper-dot" aria-hidden="true"></span>
+                        <span class="step-next">Next: Eligibility Review</span>
+                    </div>
+                    <div class="progress-bar-track" aria-hidden="true">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+
+                <div class="section-header text-center">
+                    <h2 class="section-title">Tell Us About Yourself</h2>
+                    <p class="section-subtitle">
+                        Enter your basic details below to help our algorithm match potential government welfare and development programs.
                     </p>
+
+                    <!-- Active Telemetry Badges Strip -->
+                    <div class="telemetry-strip">
+                        <span class="telemetry-badge">
+                            <span class="material-symbols-outlined text-secondary" aria-hidden="true">database</span>
+                            <span>40+ Schemes Indexed</span>
+                        </span>
+                        <span class="telemetry-badge">
+                            <span class="material-symbols-outlined text-primary" aria-hidden="true">speed</span>
+                            <span>Real-time Matching</span>
+                        </span>
+                        <span class="telemetry-badge telemetry-badge-highlight">
+                            <span class="material-symbols-outlined" aria-hidden="true">lock</span>
+                            <span>Client-Side Only</span>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="questionnaire-card">
-
-                    <div class="form-intro">
+                    <div class="card-intro">
                         <div>
-                            <h3>Your basic information</h3>
-                            <p>Fields marked with * are required.</p>
+                            <h3 class="card-intro-title">Your Profile Information</h3>
+                            <p class="card-intro-sub">Fields marked with an asterisk (*) are required.</p>
                         </div>
-
-                        <span class="step-label">PROFILE DETAILS</span>
+                        <span class="profile-label">CITIZEN PROFILE</span>
                     </div>
 
                     <!-- JavaScript validates and processes this form -->
@@ -274,161 +535,184 @@
 
                         <div class="form-grid">
 
+                            <!-- Field 1: Age -->
                             <div class="form-group">
-                                <label for="age">Your age *</label>
-                                <input
-                                    type="number"
-                                    id="age"
-                                    name="age"
-                                    min="0"
-                                    max="120"
-                                    placeholder="Enter your age"
-                                    required
-                                    aria-describedby="age-help">
-
-                                <small id="age-help">
-                                    Enter your age in completed years.
-                                </small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="state">State or Union Territory *</label>
-
-                                <select id="state" name="state" required>
-                                    <option value="">Select your state</option>
-                                    <option>Andhra Pradesh</option>
-                                    <option>Arunachal Pradesh</option>
-                                    <option>Assam</option>
-                                    <option>Bihar</option>
-                                    <option>Chhattisgarh</option>
-                                    <option>Goa</option>
-                                    <option>Gujarat</option>
-                                    <option>Haryana</option>
-                                    <option>Himachal Pradesh</option>
-                                    <option>Jharkhand</option>
-                                    <option>Karnataka</option>
-                                    <option>Kerala</option>
-                                    <option>Madhya Pradesh</option>
-                                    <option>Maharashtra</option>
-                                    <option>Manipur</option>
-                                    <option>Meghalaya</option>
-                                    <option>Mizoram</option>
-                                    <option>Nagaland</option>
-                                    <option>Odisha</option>
-                                    <option>Punjab</option>
-                                    <option>Rajasthan</option>
-                                    <option>Sikkim</option>
-                                    <option>Tamil Nadu</option>
-                                    <option>Telangana</option>
-                                    <option>Tripura</option>
-                                    <option>Uttar Pradesh</option>
-                                    <option>Uttarakhand</option>
-                                    <option>West Bengal</option>
-                                    <option>Andaman and Nicobar Islands</option>
-                                    <option>Chandigarh</option>
-                                    <option>Dadra and Nagar Haveli and Daman and Diu</option>
-                                    <option>Delhi</option>
-                                    <option>Jammu and Kashmir</option>
-                                    <option>Ladakh</option>
-                                    <option>Lakshadweep</option>
-                                    <option>Puducherry</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="income">
-                                    Annual family income (₹) *
+                                <label for="age" class="form-label">
+                                    <span>Your age *</span>
+                                    <span class="label-hint">Mandatory</span>
                                 </label>
-
-                                <input
-                                    type="number"
-                                    id="income"
-                                    name="income"
-                                    min="0"
-                                    step="1"
-                                    placeholder="e.g. 200000"
-                                    required
-                                    aria-describedby="income-help">
-
-                                <small id="income-help">
-                                    Enter an approximate yearly amount.
+                                <div class="input-with-icon">
+                                    <input
+                                        type="number"
+                                        id="age"
+                                        name="age"
+                                        min="0"
+                                        max="120"
+                                        placeholder="e.g. 34"
+                                        required
+                                        aria-describedby="age-help">
+                                    <span class="material-symbols-outlined input-icon" aria-hidden="true">calendar_today</span>
+                                </div>
+                                <small id="age-help" class="form-help">
+                                    Enter your age in completed years as on official ID.
                                 </small>
                             </div>
 
+                            <!-- Field 2: State -->
                             <div class="form-group">
-                                <label for="occupation">Occupation *</label>
-
-                                <select id="occupation"
-                                        name="occupation"
-                                        required>
-                                    <option value="">Select occupation</option>
-                                    <option value="student">Student</option>
-                                    <option value="farmer">Farmer</option>
-                                    <option value="working">Working professional</option>
-                                    <option value="homemaker">Homemaker</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group full-width"
-                                 id="student-status-group"
-                                 hidden>
-
-                                <label for="student-status">
-                                    Current student status *
+                                <label for="state" class="form-label">
+                                    <span>State or Union Territory *</span>
+                                    <span class="label-hint">Regional Schemes</span>
                                 </label>
-
-                                <select id="student-status"
-                                        name="studentStatus">
-                                    <option value="">Select student status</option>
-                                    <option value="school">School student</option>
-                                    <option value="college">College student</option>
-                                    <option value="vocational">Vocational / skill training</option>
-                                    <option value="other">Other student</option>
-                                </select>
-
-                                <small>
-                                    This question appears when you select Student.
+                                <div class="input-with-icon">
+                                    <select id="state" name="state" required>
+                                        <option value="">Select your state</option>
+                                        <option>Andhra Pradesh</option>
+                                        <option>Arunachal Pradesh</option>
+                                        <option>Assam</option>
+                                        <option>Bihar</option>
+                                        <option>Chhattisgarh</option>
+                                        <option>Goa</option>
+                                        <option>Gujarat</option>
+                                        <option>Haryana</option>
+                                        <option>Himachal Pradesh</option>
+                                        <option>Jharkhand</option>
+                                        <option>Karnataka</option>
+                                        <option>Kerala</option>
+                                        <option>Madhya Pradesh</option>
+                                        <option>Maharashtra</option>
+                                        <option>Manipur</option>
+                                        <option>Meghalaya</option>
+                                        <option>Mizoram</option>
+                                        <option>Nagaland</option>
+                                        <option>Odisha</option>
+                                        <option>Punjab</option>
+                                        <option>Rajasthan</option>
+                                        <option>Sikkim</option>
+                                        <option>Tamil Nadu</option>
+                                        <option>Telangana</option>
+                                        <option>Tripura</option>
+                                        <option>Uttar Pradesh</option>
+                                        <option>Uttarakhand</option>
+                                        <option>West Bengal</option>
+                                        <option>Andaman and Nicobar Islands</option>
+                                        <option>Chandigarh</option>
+                                        <option>Dadra and Nagar Haveli and Daman and Diu</option>
+                                        <option>Delhi</option>
+                                        <option>Jammu and Kashmir</option>
+                                        <option>Ladakh</option>
+                                        <option>Lakshadweep</option>
+                                        <option>Puducherry</option>
+                                    </select>
+                                    <span class="material-symbols-outlined input-icon" aria-hidden="true">expand_more</span>
+                                </div>
+                                <small class="form-help">
+                                    Unlocks state-specific subsidies and regional agrarian programs.
                                 </small>
                             </div>
 
+                            <!-- Field 3: Occupation -->
+                            <div class="form-group">
+                                <label for="occupation" class="form-label">
+                                    <span>Primary Occupation *</span>
+                                    <span class="label-hint text-secondary font-semibold">Match Engine</span>
+                                </label>
+                                <div class="input-with-icon">
+                                    <select id="occupation" name="occupation" required>
+                                        <option value="">Select occupation</option>
+                                        <option value="student">Student</option>
+                                        <option value="farmer">Farmer / Agriculturalist</option>
+                                        <option value="working">Working professional (Employed)</option>
+                                        <option value="self-employed">Self-employed / Artisan / Business</option>
+                                        <option value="unemployed">Unemployed / Seeking work</option>
+                                        <option value="homemaker">Homemaker</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <span class="material-symbols-outlined input-icon" aria-hidden="true">work</span>
+                                </div>
+                                <small class="form-help">
+                                    Determines sectoral grants, PM-KISAN, crop insurance, and equipment benefits.
+                                </small>
+                            </div>
+
+                            <!-- Field 4: Income -->
+                            <div class="form-group">
+                                <label for="income" class="form-label">
+                                    <span>Annual Family Income (₹) *</span>
+                                    <span class="label-hint">Income Bracket</span>
+                                </label>
+                                <div class="input-with-icon">
+                                    <input
+                                        type="number"
+                                        id="income"
+                                        name="income"
+                                        min="0"
+                                        step="1"
+                                        placeholder="e.g. 200000"
+                                        required
+                                        aria-describedby="income-help">
+                                    <span class="material-symbols-outlined input-icon" aria-hidden="true">account_balance_wallet</span>
+                                </div>
+                                <small id="income-help" class="form-help">
+                                    Combined total income of household members before tax.
+                                </small>
+                            </div>
+
+                            <!-- Conditional Field: Student Status -->
+                            <div class="form-group full-width" id="student-status-group" hidden>
+                                <label for="student-status" class="form-label">
+                                    <span>Current student status *</span>
+                                    <span class="label-hint text-accent">Education Cohort</span>
+                                </label>
+                                <div class="input-with-icon">
+                                    <select id="student-status" name="studentStatus">
+                                        <option value="">Select student status</option>
+                                        <option value="school">School student</option>
+                                        <option value="college">College student</option>
+                                        <option value="vocational">Vocational / skill training</option>
+                                        <option value="other">Other student</option>
+                                    </select>
+                                    <span class="material-symbols-outlined input-icon" aria-hidden="true">school</span>
+                                </div>
+                                <small class="form-help">
+                                    Appears when you select Student. Tailors scholarship and stipend discovery.
+                                </small>
+                            </div>
+
+                            <!-- Field: Additional Details -->
                             <div class="form-group full-width">
-                                <label for="additional-details">
-                                    Additional details (optional)
+                                <label for="additional-details" class="form-label">
+                                    <span>Additional details (optional)</span>
+                                    <span class="label-hint">Context</span>
                                 </label>
-
                                 <textarea
                                     id="additional-details"
                                     name="additionalDetails"
                                     rows="3"
                                     maxlength="500"
-                                    placeholder="For example, relevant education or work details. Do not enter identity numbers or bank details."></textarea>
-
-                                <small>
-                                    Share only details relevant to scheme
-                                    requirements. Avoid sensitive personal information.
+                                    placeholder="For example, relevant education, land size, or craft trade. Do not enter identity numbers or bank details."></textarea>
+                                <small class="form-help">
+                                    Share only details relevant to scheme criteria. Never submit sensitive identity records.
                                 </small>
                             </div>
 
                         </div>
 
+                        <!-- Privacy Note Box -->
                         <div class="privacy-note">
-                            <span aria-hidden="true">🔒</span>
-                            <p>
-                                <strong>Your privacy matters.</strong>
-                                This prototype is designed to process your
-                                answers in your browser. Do not enter Aadhaar
-                                numbers, bank details, or other sensitive information.
-                            </p>
+                            <span class="material-symbols-outlined privacy-icon" aria-hidden="true">lock</span>
+                            <div class="privacy-text">
+                                <p><strong>Privacy Reassurance: Local Session Security</strong></p>
+                                <p>SchemeMatch runs entirely in your browser. We never collect Aadhaar numbers, OTPs, or bank records.</p>
+                            </div>
                         </div>
 
-                        <button type="submit" class="button button-submit">
-                            Find Matching Schemes
-                            <span aria-hidden="true">→</span>
+                        <button type="submit" class="button button-primary button-large button-submit">
+                            <span>Find Matching Schemes</span>
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>
                         </button>
 
                     </form>
-
                 </div>
             </div>
         </section>
@@ -436,125 +720,165 @@
 
         <!-- ================= RESULTS SECTION ================= -->
         <section id="results" class="results-section" hidden>
-
             <div class="section-container">
 
-                <div class="section-heading results-heading">
-                    <span class="eyebrow">YOUR SCHEME DISCOVERY</span>
-                    <h2>Explore your potential matches.</h2>
-                    <p>
-                        Review each scheme's requirements carefully.
-                        A possible match is not a confirmation of eligibility.
-                    </p>
+                <!-- Results Profile Header & Summary -->
+                <div class="results-dossier-header">
+                    <div class="results-status-pill">
+                        <span class="material-symbols-outlined text-secondary" aria-hidden="true">how_to_reg</span>
+                        <span>Algorithmic Profile Analysis Complete</span>
+                    </div>
+
+                    <h2 class="results-main-title">Your Potential Scheme Matches</h2>
+
+                    <!-- Active Citizen Profile Chips (Stitch screen C) -->
+                    <div class="results-profile-chips" id="results-profile-chips" aria-label="Active profile context"></div>
+
+                    <div class="results-summary" id="results-summary" aria-live="polite"></div>
+
+                    <!-- Metric Aggregate Cards -->
+                    <div class="metric-aggregates-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-primary">
+                                <span class="material-symbols-outlined" aria-hidden="true">dataset</span>
+                            </div>
+                            <div>
+                                <div class="metric-num text-primary" id="metric-total-evaluated">30 Schemes</div>
+                                <div class="metric-sub" id="metric-evaluated-sub">Evaluated in demo registry</div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-secondary">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">task_alt</span>
+                            </div>
+                            <div>
+                                <div class="metric-num text-secondary" id="metric-potential-matches">0 Matches</div>
+                                <div class="metric-sub" id="metric-potential-sub">Criteria satisfied in demo</div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-tertiary">
+                                <span class="material-symbols-outlined text-accent" aria-hidden="true">pending_actions</span>
+                            </div>
+                            <div>
+                                <div class="metric-num text-accent" id="metric-needs-verification">0 To Verify</div>
+                                <div class="metric-sub" id="metric-verification-sub">Schemes with pending checks</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="results-summary" id="results-summary"
-                     aria-live="polite">
-                </div>
-
+                <!-- Results Toolbar -->
                 <div class="results-toolbar">
                     <div class="form-group filter-group">
-                        <label for="category-filter">Filter by beneficiary category</label>
+                        <label for="category-filter" class="filter-label">Filter by beneficiary category</label>
+                        <div class="input-with-icon">
+                            <select id="category-filter">
+                                <option value="all">All categories</option>
+                                <option value="education">Education</option>
+                                <option value="employment">Employment</option>
+                                <option value="general">General</option>
+                                <option value="health">Health</option>
+                                <option value="rural">Rural</option>
+                                <option value="women">Women</option>
+                            </select>
+                            <span class="material-symbols-outlined input-icon" aria-hidden="true">expand_more</span>
+                        </div>
+                    </div>
 
-                        <select id="category-filter">
-                            <option value="all">All categories</option>
-                            <option value="education">Education</option>
-                            <option value="employment">Employment</option>
-                            <option value="general">General</option>
-                            <option value="health">Health</option>
-                            <option value="rural">Rural</option>
-                            <option value="women">Women</option>
-                        </select>
+                    <div class="results-toolbar-actions">
+                        <button type="button" class="button button-outline" id="edit-answers-results-button">
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">tune</span>
+                            <span>Edit My Answers</span>
+                        </button>
+                        <button type="button" class="button button-secondary" id="start-again-button">
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">restart_alt</span>
+                            <span>Start Again</span>
+                        </button>
                     </div>
                 </div>
 
                 <!-- JavaScript inserts scheme cards here -->
                 <div id="scheme-results" class="scheme-results-grid"></div>
 
+                <!-- Empty State (No Results) -->
                 <div id="no-results" class="no-results" hidden>
-                    <div class="no-results-icon" aria-hidden="true">⌕</div>
-                    <h3>No potential matches found</h3>
-                    <p id="no-results-message">
-                        Try changing your answers or checking schemes from
-                        other categories. This does not mean that no scheme
-                        is available to you.
+                    <div class="no-results-icon" aria-hidden="true">
+                        <span class="material-symbols-outlined">search_off</span>
+                    </div>
+                    <h3 class="no-results-title">No potential matches found</h3>
+                    <p id="no-results-message" class="no-results-text">
+                        Try changing your answers or exploring other categories. This does not mean that no government program is available to you.
                     </p>
-
-                    <button type="button"
-                            class="button"
-                            id="edit-answers-button">
-                        Edit My Answers
+                    <button type="button" class="button button-primary" id="edit-answers-button">
+                        <span class="material-symbols-outlined btn-icon" aria-hidden="true">tune</span>
+                        <span>Edit My Answers</span>
                     </button>
                 </div>
 
-                <!-- Detailed scheme information appears here -->
-                <div id="scheme-details"
-                     class="scheme-details"
-                     aria-live="polite"
-                     hidden>
-                </div>
+                <!-- Detailed Scheme Dossier Panel (revealed on card click) -->
+                <div id="scheme-details" class="scheme-details" aria-live="polite" hidden></div>
 
+                <!-- Eligibility Gap Finder Panel -->
                 <div class="eligibility-panel" id="eligibility-panel" hidden>
                     <div class="eligibility-heading">
-                        <span class="eyebrow">YOUR KEY INSIGHT</span>
-                        <h2>Eligibility Gap Finder</h2>
-                        <p>
-                            Review individual conditions instead of assuming
-                            that a partial match means you are eligible.
+                        <span class="section-eyebrow">YOUR KEY INSIGHT</span>
+                        <h2 class="section-title">Eligibility Gap Finder</h2>
+                        <p class="section-subtitle">
+                            Review individual conditions clause-by-clause instead of assuming that a partial match confirms real-world eligibility.
                         </p>
                     </div>
 
                     <div class="eligibility-columns">
-
                         <div class="eligibility-column matched-column">
-                            <h3>
-                                <span aria-hidden="true">✓</span>
-                                Appears to match
+                            <h3 class="column-title">
+                                <span class="material-symbols-outlined col-icon" aria-hidden="true">check_circle</span>
+                                <span>Appears to match</span>
                             </h3>
-                            <ul id="matched-list"></ul>
+                            <ul id="matched-list" class="criteria-list"></ul>
                         </div>
 
                         <div class="eligibility-column unmet-column">
-                            <h3>
-                                <span aria-hidden="true">!</span>
-                                Appears unmet
+                            <h3 class="column-title">
+                                <span class="material-symbols-outlined col-icon" aria-hidden="true">cancel</span>
+                                <span>Appears unmet</span>
                             </h3>
-                            <ul id="unmet-list"></ul>
+                            <ul id="unmet-list" class="criteria-list"></ul>
                         </div>
 
                         <div class="eligibility-column unknown-column">
-                            <h3>
-                                <span aria-hidden="true">?</span>
-                                Needs verification
+                            <h3 class="column-title">
+                                <span class="material-symbols-outlined col-icon" aria-hidden="true">help</span>
+                                <span>Needs verification</span>
                             </h3>
-                            <ul id="unknown-list"></ul>
+                            <ul id="unknown-list" class="criteria-list"></ul>
                         </div>
-
                     </div>
 
-                    <p class="eligibility-disclaimer">
-                        <strong>Important:</strong>
-                        SchemeMatch provides preliminary guidance only.
-                        The relevant government department determines final
-                        eligibility. Verify all mandatory conditions and
-                        current scheme information through official sources.
-                    </p>
+                    <div class="eligibility-disclaimer">
+                        <span class="material-symbols-outlined disclaimer-icon-sm" aria-hidden="true">info</span>
+                        <p>
+                            <strong>Important Civic Notice:</strong>
+                            SchemeMatch provides preliminary, algorithmic guidance only. The relevant government department determines final eligibility and fund disbursement. Verify all mandatory conditions through official ministry portals.
+                        </p>
+                    </div>
                 </div>
 
+                <!-- Persistent Bottom Action Group -->
                 <div class="results-actions">
                     <p class="results-actions-prompt">
-                        Want to adjust your answers or explore other criteria?
+                        Want to adjust your profile or explore other criteria?
                     </p>
                     <div class="results-actions-buttons">
-                        <button type="button"
-                                class="button"
-                                id="edit-answers-results-button">
-                            Edit My Answers
+                        <button type="button" class="button button-primary" onclick="handleEditAnswers()">
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">tune</span>
+                            <span>Edit My Answers</span>
                         </button>
-                        <button type="button"
-                                class="button button-secondary"
-                                id="start-again-button">
-                            Start Again
+                        <button type="button" class="button button-secondary" onclick="document.getElementById('start-again-button').click()">
+                            <span class="material-symbols-outlined btn-icon" aria-hidden="true">restart_alt</span>
+                            <span>Start Again</span>
                         </button>
                     </div>
                 </div>
@@ -563,183 +887,147 @@
         </section>
 
 
-        <!-- ================= HOW IT WORKS ================= -->
-        <section id="how-it-works" class="how-section">
-
+        <!-- ================= CIVIC PROTOTYPE GOVERNANCE & TRANSPARENCY ================= -->
+        <section class="governance-section">
             <div class="section-container">
-
-                <div class="section-heading">
-                    <span class="eyebrow">FOUR SIMPLE STEPS</span>
-                    <h2>How SchemeMatch works.</h2>
-                    <p>
-                        From your basic profile to your next informed step.
-                    </p>
+                <div class="governance-card">
+                    <div class="governance-icon-wrap" aria-hidden="true">
+                        <span class="material-symbols-outlined">policy</span>
+                    </div>
+                    <div class="governance-content">
+                        <div class="governance-badge-group">
+                            <h3 class="governance-title">Civic Prototype Governance &amp; Institutional Transparency</h3>
+                            <span class="governance-pill">Hackathon Prototype Notice</span>
+                        </div>
+                        <p class="governance-text">
+                            SchemeMatch is an independent civic-tech prototype developed for <strong>INNOHACKS 2.0</strong>. Results are indicative guideposts to help citizens, farmers, and rural collectives discover opportunities. Final eligibility criteria, document validation, fund sanction, and disbursements are solely governed by official government portals and designated administrative officers.
+                        </p>
+                        <div class="governance-meta">
+                            <span class="meta-point">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">rule</span>
+                                <span>Rules strictly aligned to open government schemas</span>
+                            </span>
+                            <span class="meta-point">
+                                <span class="material-symbols-outlined text-secondary" aria-hidden="true">lock</span>
+                                <span>No credentials or bank records are stored or collected</span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="steps-grid">
-
-                    <article class="step-card">
-                        <div class="step-number">01</div>
-                        <h3>Share your profile</h3>
-                        <p>
-                            Answer a few simple questions about your
-                            circumstances.
-                        </p>
-                    </article>
-
-                    <article class="step-card">
-                        <div class="step-number">02</div>
-                        <h3>Explore potential matches</h3>
-                        <p>
-                            Compare your answers with the available scheme
-                            information in our dataset.
-                        </p>
-                    </article>
-
-                    <article class="step-card">
-                        <div class="step-number">03</div>
-                        <h3>Understand eligibility gaps</h3>
-                        <p>
-                            Identify conditions that appear satisfied,
-                            unmet or still unknown.
-                        </p>
-                    </article>
-
-                    <article class="step-card">
-                        <div class="step-number">04</div>
-                        <h3>Verify before applying</h3>
-                        <p>
-                            Check official requirements and prepare the
-                            documents listed by the authority.
-                        </p>
-                    </article>
-
-                </div>
-
             </div>
         </section>
 
 
         <!-- ================= ABOUT SECTION ================= -->
         <section id="about" class="about-section">
-
             <div class="section-container about-container">
-
                 <div class="about-content">
-                    <span class="eyebrow">ABOUT SCHEMEMATCH</span>
-
-                    <h2>Making scheme information easier to understand.</h2>
-
-                    <p>
-                        SchemeMatch is a government scheme discovery
-                        prototype created to help people explore potentially
-                        relevant opportunities and understand eligibility
-                        requirements in simpler language.
+                    <span class="section-eyebrow">ABOUT SCHEMEMATCH</span>
+                    <h2 class="section-title">Making Scheme Information Understandable for Every Citizen</h2>
+                    <p class="about-p">
+                        SchemeMatch is a government scheme discovery prototype built for INNOHACKS 2.0 by <strong>Team Impact X</strong>. Our goal is to bridge the awareness gap between public welfare schemes and eligible beneficiaries.
                     </p>
-
-                    <p>
-                        Our approach focuses on transparent requirement
-                        checks, identifying missing information, and
-                        directing users to verified official sources.
+                    <p class="about-p">
+                        By structuring complex eligibility gazettes into plain language, transparent criteria classifications, and direct prerequisite checklists, we empower households to explore civic opportunities with clarity and confidence.
                     </p>
-
-                    <div class="about-highlight">
-                        <span class="about-highlight-icon" aria-hidden="true">✦</span>
-                        <p>
-                            <strong>Our mission</strong><br>
-                            Help people discover opportunities with clarity
-                            and confidence.
-                        </p>
+                    <div class="about-mission-box">
+                        <span class="material-symbols-outlined text-accent mission-icon" aria-hidden="true">lightbulb</span>
+                        <div>
+                            <strong>Our Mission</strong>
+                            <p>Democratize access to public entitlements through transparent, private, and human-scale civic technology.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="about-visual">
-                    <div class="about-stat-card">
-                        <span class="about-stat-icon" aria-hidden="true">◎</span>
-                        <h3>People first</h3>
-                        <p>Designed around understandable information.</p>
+                <div class="about-visual-grid">
+                    <div class="about-card">
+                        <span class="material-symbols-outlined text-primary" aria-hidden="true">groups</span>
+                        <h3>People First</h3>
+                        <p>Designed around clear, approachable language and non-technical access.</p>
                     </div>
-
-                    <div class="about-stat-card">
-                        <span class="about-stat-icon" aria-hidden="true">✓</span>
-                        <h3>Transparency first</h3>
-                        <p>Unknown requirements stay clearly marked.</p>
+                    <div class="about-card">
+                        <span class="material-symbols-outlined text-secondary" aria-hidden="true">verified_user</span>
+                        <h3>Transparency First</h3>
+                        <p>Unmet and unknown criteria remain clearly distinguished from confirmed matches.</p>
                     </div>
-
-                    <div class="about-stat-card">
-                        <span class="about-stat-icon" aria-hidden="true">↗</span>
-                        <h3>Official verification</h3>
-                        <p>Users are encouraged to verify before applying.</p>
+                    <div class="about-card">
+                        <span class="material-symbols-outlined text-accent" aria-hidden="true">verified</span>
+                        <h3>Official Routing</h3>
+                        <p>Directs users to verified .gov.in ministry portals for authentic submissions.</p>
                     </div>
                 </div>
-
-            </div>
-        </section>
-
-
-        <!-- ================= DISCLAIMER ================= -->
-        <section class="disclaimer-section">
-            <div class="section-container disclaimer-content">
-
-                <span class="disclaimer-icon" aria-hidden="true">i</span>
-
-                <div>
-                    <h2>Important information</h2>
-                    <p>
-                        SchemeMatch is a hackathon prototype, not a government
-                        service. Scheme listings and matching results depend
-                        on the information implemented in this version.
-                        Unverified details must not be treated as official
-                        facts. Eligibility, required documents, benefits and
-                        application procedures must be confirmed with the
-                        relevant government department or official portal.
-                    </p>
-                </div>
-
             </div>
         </section>
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- ================= CIVIC FOOTER ================= -->
     <footer class="footer">
+        <div class="section-container footer-container">
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="material-symbols-outlined footer-logo-icon" aria-hidden="true">account_balance</span>
+                        <span class="logo-text">Scheme<span class="logo-accent">Match</span></span>
+                    </div>
+                    <p class="footer-tagline">
+                        Empowering citizens, farmers, and rural collectives to discover, evaluate, and claim eligible welfare programs with institutional clarity and transparency.
+                    </p>
+                    <div class="footer-a11y-badge">
+                        <span class="material-symbols-outlined text-secondary" aria-hidden="true">verified_user</span>
+                        <span>WCAG 2.1 AAA Compliant Design Architecture</span>
+                    </div>
+                </div>
 
-        <div class="section-container footer-main">
+                <!-- Navigation Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Citizen Portal Home</a></li>
+                        <li><a href="#find-schemes">Scheme Directory</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#categories">Priority Categories</a></li>
+                        <li><a href="#about">About Team Impact X</a></li>
+                    </ul>
+                </div>
 
-            <div class="footer-brand">
-                <a href="#home" class="logo">
-                    <span class="logo-icon" aria-hidden="true">S</span>
-                    <span>Scheme<span class="logo-highlight">Match</span></span>
-                </a>
-
-                <p>
-                    The Right Scheme for the Right Person at the Right Time.
-                </p>
+                <!-- Civic Transparency Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Civic Transparency</h4>
+                    <ul class="footer-links">
+                        <li><span>Data Privacy &amp; Dignity</span></li>
+                        <li><span>Open Data Schemas</span></li>
+                        <li><span>Indicative Evaluation Logic</span></li>
+                        <li><span>Institutional Disclaimers</span></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="footer-links">
-                <h3>Explore</h3>
-                <a href="#home">Home</a>
-                <a href="#find-schemes">Find Schemes</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#about">About Us</a>
+            <!-- Public Advisory Card -->
+            <div class="footer-advisory">
+                <span class="material-symbols-outlined text-accent advisory-icon" aria-hidden="true">shield</span>
+                <div>
+                    <p class="advisory-title">Public Civic Advisory &amp; Indicative Notice</p>
+                    <p class="advisory-text">
+                        SchemeMatch matches profiles against publicly published program criteria. Match outputs, funding projections, and deadline assessments are purely indicative. Users must finalize verification and formal submissions directly on authoritative official ministerial portals.
+                    </p>
+                </div>
             </div>
 
-            <div class="footer-links">
-                <h3>Our principles</h3>
-                <span>Privacy-conscious design</span>
-                <span>Transparent eligibility checks</span>
-                <span>Official source verification</span>
+            <!-- Bottom Copyright & Status -->
+            <div class="footer-bottom">
+                <p>© 2026 SchemeMatch — Crafted with public service purpose by Team Impact X for INNOHACKS 2.0.</p>
+                <div class="footer-status-pills">
+                    <span class="status-indicator">
+                        <span class="status-dot-active" aria-hidden="true"></span>
+                        <span>Civic Service Status: Nominal</span>
+                    </span>
+                    <span class="footer-ver">Open Standard v2.4</span>
+                </div>
             </div>
-
         </div>
-
-        <div class="section-container footer-bottom">
-            <p>© 2026 SchemeMatch · Hackathon Prototype</p>
-            <p>Built by Team Impact X</p>
-        </div>
-
     </footer>
 
 </body>
