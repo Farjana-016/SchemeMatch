@@ -1686,15 +1686,25 @@ function updateCategoryOptions() {
         : "all";
 }
 
+const BACKEND_API_URL = "https://schemematch-1.onrender.com/api/schemes";
+
 async function loadSchemesFromBackend() {
     if (submitButton) submitButton.disabled = true;
 
     try {
-        console.log("Loading SchemeMatch demo schemes...");
-        const response = await fetch("./schemes.json");
-
-        if (!response.ok) {
-            throw new Error("Could not load schemes.json. HTTP status: " + response.status);
+        console.log("Loading SchemeMatch demo schemes from backend API...");
+        let response;
+        try {
+            response = await fetch(BACKEND_API_URL);
+            if (!response.ok) {
+                throw new Error("Backend API HTTP status: " + response.status);
+            }
+        } catch (apiError) {
+            console.warn("Backend API unavailable, falling back to local schemes.json:", apiError);
+            response = await fetch("./schemes.json");
+            if (!response.ok) {
+                throw new Error("Could not load schemes.json. HTTP status: " + response.status);
+            }
         }
 
         const data = await response.json();
@@ -1705,7 +1715,7 @@ async function loadSchemesFromBackend() {
                 : null;
 
         if (!schemeRecords || schemeRecords.length === 0) {
-            throw new Error("The JSON file does not contain any schemes.");
+            throw new Error("The scheme database does not contain any schemes.");
         }
 
         schemes = schemeRecords.map(convertBackendScheme);
@@ -1717,12 +1727,12 @@ async function loadSchemesFromBackend() {
         if (submitButton) submitButton.disabled = false;
         showFormError("");
 
-        console.log("Successfully loaded " + schemes.length + " fictional demo schemes.");
+        console.log("Successfully loaded " + schemes.length + " schemes.");
     } catch (error) {
         schemesLoaded = false;
-        schemeLoadError = "Could not load demo schemes. Check that schemes.json is inside the frontend folder.";
+        schemeLoadError = "Could not load schemes from server or local database.";
         showFormError(schemeLoadError);
-        console.error("SchemeMatch demo data loading failed:", error);
+        console.error("SchemeMatch data loading failed:", error);
     }
 }
 
